@@ -1,0 +1,86 @@
+package APITest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
+import java.util.Map;
+
+public class APIFootballTest {
+	final String APIKey = "ac8a8a67";
+	
+	@Test
+    public void TestGetBalance() {
+		String Title = "";
+		String Director = "";
+		String Runtime = "";
+		
+		String TitleExpected = "The Batman";
+		String DirectorExpected = "Matt Reeves";
+		String RuntimeExpected = "176 min";
+		
+		Client client = ClientBuilder.newClient();
+		String title = "Batman";
+		int year = 2022;
+		
+		try {
+			Response response = client.target("http://www.omdbapi.com/?apikey=" + APIKey + "&t=" + title + "&y=" + year)
+					.request(MediaType.APPLICATION_JSON)
+					.get();
+			
+			if (response.getStatus() == 200) 
+			{
+				Map<String, Object> result = response.readEntity(Map.class);
+				Title =  (String) result.get("Title");
+				Director =  (String) result.get("Director");
+				Runtime =  (String) result.get("Runtime");
+			} 
+			else 
+			{
+				System.out.println("Error: " + response.getStatus());
+			}
+		} 
+		catch (Exception e) 
+		{
+			System.out.println("Exception: " + e.toString());
+		} 
+		finally 
+		{
+			client.close();
+		}
+
+		assertEquals(TitleExpected, Title);
+		assertEquals(DirectorExpected, Director);
+		assertEquals(RuntimeExpected, Runtime);
+    }
+}
+
+/*
+
+Client client = ClientBuilder.newClient();
+        try {
+            Response response = client.target("https://api-football-v1.p.rapidapi.com/v3/timezone")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
+                    .header("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com")
+                    .get();
+
+            if (response.getStatus() == 200) {
+                String result = response.readEntity(String.class);
+                System.out.println(result);
+            } else {
+                System.out.println("Error: " + response.getStatus());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            client.close();
+        }
+    }
+*/

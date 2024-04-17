@@ -1,0 +1,72 @@
+package APITest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.StringReader;
+import java.util.Map;
+
+public class APIFootballTest {
+	final String APIKey = "ac8a8a67";
+	
+	@Test
+    public void TestGetBalance() {
+
+
+		        Client client = ClientBuilder.newClient();
+		        try {
+		            Response response = client.target("http://www.omdbapi.com/?apikey=ac8a8a67&t=Batman&y=2005")
+		                    .request(MediaType.APPLICATION_JSON)
+		                    .get();
+
+		            if (response.getStatus() == 200) {
+		            	Map<String, Object> result = response.readEntity(Map.class);
+		            	
+
+		                System.out.println("Title: " +  (String) result.get("Title"));
+		                //System.out.println("Year: " + year);
+		                //System.out.println("Released: " + released);
+		            } else {
+		                System.out.println("Error: " + response.getStatus());
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } finally {
+		            client.close();
+		        }
+		    
+		
+
+        assertEquals(1, 2);
+    }
+}
+
+/*
+
+Client client = ClientBuilder.newClient();
+        try {
+            Response response = client.target("https://api-football-v1.p.rapidapi.com/v3/timezone")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
+                    .header("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com")
+                    .get();
+
+            if (response.getStatus() == 200) {
+                String result = response.readEntity(String.class);
+                System.out.println(result);
+            } else {
+                System.out.println("Error: " + response.getStatus());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            client.close();
+        }
+    }
+*/

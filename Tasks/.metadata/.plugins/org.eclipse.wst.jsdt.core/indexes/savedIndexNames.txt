@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+E:\UNI\semester8\Software Construction Technologies\Tasks\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+1165249623.index
+1940657634.index
+1631156865.index
+1763994322.index
+3532596233.index

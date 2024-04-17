@@ -1,0 +1,67 @@
+package APITest;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import _SuiteJUnit.Account;
+
+public class APIFootballTest {
+	@Test
+    public void TestGetBalance() {
+		Client client = ClientBuilder.newClient();
+        try {
+            Response response = client.target("https://api-football-v1.p.rapidapi.com/v3/timezone")
+            		.request(MediaType.APPLICATION_JSON)
+                    .header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
+                    .header("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com")
+                    .get();
+
+            if (response.getStatus() == 200) 
+            {
+                String result = response.readEntity(String.class);
+                System.out.println(result);
+            } 
+            else 
+            {
+                System.out.println("Error: " + response.getStatus());
+            }
+        } 
+        catch (Exception e) 
+        {
+            e.printStackTrace();
+        } 
+        finally 
+        {
+            client.close();
+        }
+        //assertEquals(balance, account.GetBalance());
+    }
+}
+
+/*
+
+Client client = ClientBuilder.newClient();
+        try {
+            Response response = client.target("https://api-football-v1.p.rapidapi.com/v3/timezone")
+                    .request(MediaType.APPLICATION_JSON)
+                    .header("X-RapidAPI-Key", "SIGN-UP-FOR-KEY")
+                    .header("X-RapidAPI-Host", "api-football-v1.p.rapidapi.com")
+                    .get();
+
+            if (response.getStatus() == 200) {
+                String result = response.readEntity(String.class);
+                System.out.println(result);
+            } else {
+                System.out.println("Error: " + response.getStatus());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            client.close();
+        }
+    }
+*/
