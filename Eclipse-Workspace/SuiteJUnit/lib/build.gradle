@@ -25,6 +25,11 @@ dependencies {
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
 	testImplementation group: 'org.junit.platform', name: 'junit-platform-suite-engine', version: '1.8.1'
 	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.0.0'
+	
+	implementation group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.1.1'
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.6.1.Final'
+    implementation group: 'org.jboss.resteasy', name: 'resteasy-client', version: '3.6.1.Final' 
+	implementation group: 'org.jboss.resteasy', name: 'resteasy-jackson2-provider', version: '3.6.1.Final'
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
 
